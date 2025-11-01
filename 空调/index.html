@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小米智能空调</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部标签 -->
+        <div class="ac-title-bar">
+            <div class="ac-title-main">便捷小空调</div>
+            <div class="ac-title-sub">为你夏天带来凉爽！</div>
+        </div>
+        <!-- 空调模型展示区 -->
+        <div class="air-conditioner">
+            <div class="ac-header">
+                <div class="ac-model">
+                    <!-- 空调SVG图标 -->
+                    <svg class="ac-icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                      <rect x="4" y="10" width="40" height="18" rx="4" fill="#90caf9" stroke="#1976d2" stroke-width="2"/>
+                      <rect x="8" y="28" width="32" height="6" rx="2" fill="#e3f2fd"/>
+                      <rect x="14" y="32" width="20" height="2" rx="1" fill="#90caf9"/>
+                      <circle cx="12" cy="19" r="1.5" fill="#1976d2"/>
+                      <circle cx="36" cy="19" r="1.5" fill="#1976d2"/>
+                      <rect x="20" y="18" width="8" height="2" rx="1" fill="#1976d2"/>
+                    </svg>
+                </div>
+                <div class="ac-mode">
+                    <span class="snow-icon">❄️</span>
+                </div>
+            </div>
+            <div class="ac-main">
+                <span class="ac-temp-digit" id="acTempDigit">16</span>
+                <span class="ac-temp-unit">°C</span>
+            </div>
+            <div class="ac-footer">
+                <span class="ac-dot"></span>
+            </div>
+        </div>
+        <!-- 状态显示区 -->
+        <div class="ac-status-bar">
+            <span id="status-power">状态：关机</span>
+            <span id="status-mode">模式：制冷</span>
+            <span id="status-fan">风速：自动</span>
+            <span id="status-smart">智能：关闭</span>
+            <span id="status-timer">定时：未设置</span>
+        </div>
+        <!-- 操控区 -->
+        <div class="ac-controls">
+            <div class="ac-row">
+                <button id="powerButton">开关</button>
+                <button id="smartButton">智能</button>
+                <button id="timerButton">定时</button>
+                <button id="nightButton">夜间</button>
+                <button id="ecoButton">节能</button>
+            </div>
+            <div class="ac-row">
+                <button id="tempDown">-</button>
+                <span class="ac-controls-temp" id="acControlsTemp">16°C</span>
+                <button id="tempUp">+</button>
+            </div>
+            <div class="ac-row">
+                <button id="modeButton">模式</button>
+                <button id="fanButton">风速</button>
+            </div>
+        </div>
+        <div class="timer-settings" style="display: none;">
+            <input type="time" id="timerInput">
+            <button id="confirmTimer">确认</button>
+            <button id="cancelTimer">取消</button>
+        </div>
+    </div>
+    <audio id="beepAudio" src="1.mp3" preload="auto"></audio>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

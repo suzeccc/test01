@@ -1,0 +1,329 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body.night-mode {
+    background: linear-gradient(135deg, #232946 0%, #1a1a2e 100%) !important;
+}
+body.night-mode .air-conditioner {
+    background: #232946 !important;
+    box-shadow: 0 8px 32px #0008;
+}
+body.night-mode .ac-status-bar {
+    background: #232946;
+    color: #f4faff;
+    box-shadow: 0 2px 8px #0006;
+}
+body.night-mode .ac-title-main,
+body.night-mode .ac-title-sub {
+    color: #f4faff !important;
+}
+body.night-mode .ac-temp-digit,
+body.night-mode .ac-temp-unit {
+    color: #f4faff !important;
+}
+body.night-mode .ac-dot {
+    background: #00e676;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.air-conditioner {
+    width: 420px;
+    height: 220px;
+    background: #fff;
+    border-radius: 32px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    position: relative;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ac-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 24px 32px 0 32px;
+}
+
+.ac-model {
+    display: flex;
+    align-items: center;
+}
+
+.ac-icon {
+    display: block;
+}
+
+.snow-icon {
+    font-size: 40px;
+    color: #7ed6f7;
+}
+
+.ac-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.ac-temp-digit {
+    font-family: 'Share Tech Mono', 'Consolas', 'monospace';
+    font-size: 72px;
+    color: #222;
+    letter-spacing: 2px;
+}
+
+.ac-temp-unit {
+    font-size: 36px;
+    margin-left: 8px;
+    color: #222;
+}
+
+.ac-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 0 32px 18px 0;
+}
+
+.ac-dot {
+    width: 16px;
+    height: 16px;
+    background: #2ecc40;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.display {
+    background: #2c3e50;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.temperature {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.mode, .fan-speed, .timer-display, .smart-mode {
+    font-size: 18px;
+    margin: 5px 0;
+    color: #ecf0f1;
+}
+
+.controls {
+    display: grid;
+    gap: 15px;
+}
+
+button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.power-btn button {
+    background: #e74c3c;
+    width: 100%;
+}
+
+.power-btn button:hover {
+    background: #c0392b;
+}
+
+.temp-controls, .mode-controls, .smart-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.timer-settings {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+}
+
+.timer-settings input[type="time"] {
+    padding: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.off {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.temperature-chart {
+    margin-top: 20px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.smart-mode.active {
+    color: #2ecc71;
+}
+
+.timer-display.active {
+    color: #f1c40f;
+}
+
+.ac-controls {
+    margin: 32px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.ac-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+.ac-controls button {
+    background: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+    min-width: 80px;
+}
+
+.ac-controls button:hover {
+    background: #1976d2;
+}
+
+.ac-controls-temp {
+    font-family: 'Share Tech Mono', 'Consolas', 'monospace';
+    font-size: 32px;
+    color: #222;
+    margin: 0 8px;
+    min-width: 70px;
+    text-align: center;
+}
+
+.timer-settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.timer-settings input[type="time"] {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.ac-status-bar {
+    margin-top: 18px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    font-size: 18px;
+    color: #1976d2;
+    font-weight: bold;
+    background: #f4faff;
+    border-radius: 18px;
+    box-shadow: 0 2px 8px #b3e5fc33;
+    padding: 10px 24px;
+    align-items: center;
+}
+
+.ac-status-bar span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+#status-mode::before { content: '🛠️'; }
+#status-fan::before { content: '🌀'; }
+#status-smart::before { content: '🤖'; }
+#status-timer::before { content: '⏰'; }
+#status-power::before { content: '🔌'; }
+
+.ac-controls button.active {
+    background: #2ecc71;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 0 8px #2ecc7133;
+}
+
+@media (max-width: 600px) {
+    .ac-status-bar {
+        flex-direction: column;
+        gap: 6px;
+        align-items: center;
+    }
+}
+
+.ac-title-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 18px;
+    margin-top: 18px;
+}
+.ac-title-main {
+    font-size: 2.1rem;
+    font-weight: bold;
+    color: #1976d2;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+}
+.ac-title-sub {
+    font-size: 1.1rem;
+    color: #0097a7;
+    letter-spacing: 1px;
+} 
