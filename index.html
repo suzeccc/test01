@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资本做局器</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #333;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            text-align: center;
+            width: 340px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #ffeb3b, #ff9800, #f44336, #e91e63, #9c27b0, #673ab7, #3f51b5, #2196f3, #03a9f4, #00bcd4, #009688, #4CAF50, #8BC34A, #CDDC39);
+            background-size: 400% 400%;
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.5;
+            animation: glowingBorder 10s linear infinite;
+        }
+
+        @keyframes glowingBorder {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #1a2a6c;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: inline-block;
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+        }
+
+        .icon-container {
+            margin-bottom: 20px;
+            font-size: 40px;
+            color: #b21f1f;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f);
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(26, 42, 108, 0.3);
+            font-weight: 500;
+            width: 80%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(26, 42, 108, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .progress-container {
+            margin-top: 25px;
+            display: none;
+        }
+
+        .progress-message {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #eef1f5;
+            border-radius: 50px;
+            height: 20px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
+            width: 0%;
+            border-radius: 50px;
+            transition: width 0.2s ease;
+            background-size: 500% 100%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .progress-text {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .result {
+            margin-top: 25px;
+            font-size: 18px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .emoji {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+
+        .reset-btn {
+            background: transparent;
+            border: 1px solid #1a2a6c;
+            color: #1a2a6c;
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            display: none;
+        }
+
+        .reset-btn:hover {
+            background-color: #1a2a6c;
+            color: white;
+        }
+
+        .loading-dots:after {
+            content: '.';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+
+        @keyframes dots {
+
+            0%,
+            20% {
+                content: '.';
+            }
+
+            40% {
+                content: '..';
+            }
+
+            60% {
+                content: '...';
+            }
+
+            80%,
+            100% {
+                content: '';
+            }
+        }
+
+        .capital-stats {
+            display: none;
+            margin-top: 20px;
+            background-color: rgba(26, 42, 108, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .stat-label {
+            color: #555;
+        }
+
+        .stat-value {
+            font-weight: 500;
+            color: #1a2a6c;
+        }
+
+        .capital-quote {
+            font-style: italic;
+            font-size: 14px;
+            color: #777;
+            margin-top: 20px;
+            padding: 10px;
+            border-left: 3px solid #b21f1f;
+            text-align: left;
+            display: none;
+        }
+
+        .money-icon {
+            animation: moneyRain 0.5s ease-out;
+            position: absolute;
+            color: gold;
+            opacity: 0;
+            font-size: 20px;
+        }
+
+        @keyframes moneyRain {
+            0% {
+                transform: translateY(-20px);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="icon-container">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="title">资本做局器</div>
+        <button class="btn" id="capitalBtn">开始运作</button>
+        <div class="progress-container" id="progressContainer">
+            <p class="progress-message">资本正在运作中<span class="loading-dots"></span></p>
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+            <p class="progress-text" id="progressText">0%</p>
+        </div>
+        <div class="result" id="resultContainer">
+            <p id="resultText"></p>
+            <div class="capital-stats" id="capitalStats">
+                <div class="stat-item">
+                    <span class="stat-label">资本增长率:</span>
+                    <span class="stat-value" id="growthRate">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">市场影响力:</span>
+                    <span class="stat-value" id="marketInfluence">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">财富积累:</span>
+                    <span class="stat-value" id="wealthAccumulation">¥0</span>
+                </div>
+            </div>
+            <div class="capital-quote" id="capitalQuote"></div>
+            <button class="reset-btn" id="resetBtn">再来一次</button>
+        </div>
+    </div>
+
+    <script>
+        const quotes = [
+            "时间就是金钱，效率就是生命。",
+            "不要温和地走进那个良夜。",
+            "资本的本质是逐利的。",
+            "金钱不是万能的，但没有钱是万万不能的。",
+            "投资自己，胜过投资股票。",
+            "你的时间就是资本的盈利。"
+        ];
+
+        function createMoneyIcon() {
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-coins money-icon';
+            icon.style.left = Math.random() * 80 + 10 + '%';
+            document.querySelector('.container').appendChild(icon);
+
+            setTimeout(() => {
+                icon.remove();
+            }, 500);
+        }
+
+        document.getElementById('capitalBtn').addEventListener('click', function () {
+            // 隐藏按钮，显示进度条
+            this.style.display = 'none';
+            document.getElementById('progressContainer').style.display = 'block';
+
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const resultContainer = document.getElementById('resultContainer');
+            const resultText = document.getElementById('resultText');
+            const resetBtn = document.getElementById('resetBtn');
+            const capitalStats = document.getElementById('capitalStats');
+            const capitalQuote = document.getElementById('capitalQuote');
+
+            // 记录开始时间
+            const startTime = new Date().getTime();
+
+            // 随机生成总加载时间（3-10秒）
+            const totalTime = Math.floor(Math.random() * 7000) + 3000;
+            let progress = 0;
+
+            // 创建金钱图标动画
+            const moneyInterval = setInterval(() => {
+                createMoneyIcon();
+            }, 300);
+
+            // 更新进度条
+            const interval = setInterval(() => {
+                // 随机增加进度（0.5-2%）
+                const increment = Math.random() * 1.5 + 0.5;
+                progress += increment;
+
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    clearInterval(moneyInterval);
+
+                    // 计算浪费的时间
+                    const endTime = new Date().getTime();
+                    const timeWasted = ((endTime - startTime) / 1000).toFixed(1);
+
+                    // 生成随机统计数据
+                    const growthRate = (Math.random() * 15 + 5).toFixed(2);
+                    const marketInfluence = (Math.random() * 30 + 10).toFixed(2);
+                    const wealthAccumulation = Math.floor(Math.random() * 10000) + 1000;
+
+                    // 随机选择一个名言
+                    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
+                    // 显示结果
+                    setTimeout(() => {
+                        document.getElementById('progressContainer').style.display = 'none';
+                        resultText.innerHTML = `<span class="emoji">🎉</span> 恭喜！您已成功浪费了 <b>${timeWasted} 秒</b>宝贵的生命！`;
+
+                        // 更新统计数据
+                        document.getElementById('growthRate').textContent = growthRate + '%';
+                        document.getElementById('marketInfluence').textContent = marketInfluence + '%';
+                        document.getElementById('wealthAccumulation').textContent = '¥' + wealthAccumulation.toLocaleString();
+                        capitalStats.style.display = 'block';
+
+                        // 显示名言
+                        capitalQuote.textContent = randomQuote;
+                        capitalQuote.style.display = 'block';
+
+                        resultContainer.style.display = 'block';
+                        resetBtn.style.display = 'inline-block';
+                    }, 500);
+                }
+
+                // 更新进度条显示
+                progressBar.style.width = progress + '%';
+                progressText.textContent = Math.floor(progress) + '%';
+            }, 100);
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', function () {
+            document.getElementById('capitalBtn').style.display = 'block';
+            document.getElementById('resultContainer').style.display = 'none';
+            document.getElementById('capitalStats').style.display = 'none';
+            document.getElementById('capitalQuote').style.display = 'none';
+            this.style.display = 'none';
+
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = '0%';
+            document.getElementById('progressText').textContent = '0%';
+        });
+    </script>
+</body>
+
+</html>
